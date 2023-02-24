@@ -2,6 +2,7 @@
 A demonstration of the Google Maps Javascript API that showcases some of its features. The project consists of a single web page that contains a map holder which displays two different maps. The map holder is embedded within a web design with additional text content and styled accordingly.
 
 [View Google Maps API Basic Website](https://raw.githack.com/nrosanes3/Google-Maps-API/main/basic/index.html)
+
 [View Google Maps API Geocode Website](https://raw.githack.com/nrosanes3/Google-Maps-API/main/geocode/index.html)
 
 ## Features
