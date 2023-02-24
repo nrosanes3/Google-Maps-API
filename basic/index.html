@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nina the Explora</title>
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+<style>
+    #map {
+        width:800px;
+        height: 600px;
+        margin:auto;
+    }
+</style>
+</head>
+
+<body>
+    <div id="outerWrap">
+        <div id="wrap">
+            <div id="header"><h1>Nina the Explora</h1></div>
+            <div id="main">
+                <div>
+                    <h2>Check out some of Nina's favourite places to explore!</h2>
+                    <div>
+                        <h3>Lisbon, Portugal</h3>
+                        <p>Lisbon is Portugal’s hilly, coastal capital city. From imposing São Jorge Castle, the view encompasses the old city’s pastel-colored buildings, Tagus Estuary and Ponte 25 de Abril suspension bridge. Nearby, the National Azulejo Museum displays 5 centuries of decorative ceramic tiles. Just outside Lisbon is a string of Atlantic beaches, from Cascais to Estoril. </p>
+                    </div>
+                    <div>
+                        <h3>Frigiliana, Spain</h3>
+                        <p>Frigiliana is a town in southern Spain. It's known for its Moorish old quarter and narrow streets decorated with ceramic mosaics. El Ingenio is a 16th-century Renaissance palace now housing a sugar cane factory. Exhibits at the Archaeological Museum include Neolithic bones, Phoenician pottery and a 16th-century dagger.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="map-links">
+                        <div><a href="javascript:gotoLisbon()">Lisbon</a></div>
+                        <div><a href="javascript:gotoFrigiliana()">Frigiliana</a></div>
+                    </div>
+                    <div id="map"></div>
+                    <script>
+                        //Lisbon 
+                        function gotoLisbon(){
+                            var mapOptions = {
+                                center: new google.maps.LatLng(38.73344516294897, -9.152822120311091),
+                                zoom: 12,
+                                mapTypeId: google.maps.MapTypeId.HYBRID,
+                                zoomControl: false,
+                                fullscreenControl: false
+                            };
+                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                            var lisbonCoords = [
+                                new google.maps.LatLng(38.72674949510426, -9.105786904172946), //SE
+                                new google.maps.LatLng(38.70585497830455, -9.135827644407163), //S
+                                new google.maps.LatLng(38.70009451843802, -9.226979833346412), //SW
+                                new google.maps.LatLng(38.745763552058925, -9.224061590009374), //NW
+                                new google.maps.LatLng(38.77427514569489, -9.093083962588194), //SE
+                            ];
+                            var myCircle = {
+                                strokeColor: "#ff0000",
+                                strokeOpacity: 0.8,
+                                strokeWeight: 3,
+                                fillColor: "#ff0000",
+                                fillOpacity: 0.25,
+                                map: map,
+                                center: new google.maps.LatLng(38.73344516294897, -9.152822120311091),
+                                radius: 5000
+                            };
+                            var cityCircle = new google.maps.Circle(myCircle);
+                            //restaurant
+                            var restaurantMarker = new google.maps.Marker({
+                                position: new google.maps.LatLng(38.71191210346984, -9.144161975418024),
+                                map: map,
+                                title: "Restaurante Tasca de Noticias",
+                                icon: "icons/restaurant.png"
+                            });
+                            var restaurantWindow = new google.maps.InfoWindow({
+                                content: "<div style=\"width:400px;height:200px\"><h2>Restaurante Tasca de Noticias</h2><div class=\"info-content\"><div><img class=\"info-image\" src=\"icons/tasca-de-noticias.png\" alt=\"tasca-de-noticias\"></div><div><p>Dark, cozy & traditional bar with regular live fado singers, plus rustic Portuguese bar dishes.<p></div></div></div>"
+                            });
+                            google.maps.event.addListener(restaurantMarker, "click", function(){
+                                restaurantWindow.open(map,restaurantMarker);
+                            });
+                            //viewpoint
+                            var viewpointMarker = new google.maps.Marker({
+                                position: new google.maps.LatLng(38.71160794251438, -9.130333987821604),
+                                map: map,
+                                title: "Miradouro de Santa Luzia",
+                                icon: "icons/beautifulview.png"
+                            });
+                            var viewpointWindow = new google.maps.InfoWindow({
+                                content: "<div style=\"width:400px;height:200px\"><h2>Miradouro de Santa Luzia</h2><div class=\"info-content\"><div><img class=\"info-image\" src=\"icons/viewpoint.jpg\" alt=\"viewpoint\"></div><div><p>This popular observation deck with a pergola offers dramatic views of Lisbon & the Tagus River. On an outside wall of the church are two tile panels, one of Comercio Square before the earthquake, and another showing Christians attacking St. George's Castle in 1147.<p></div></div></div>"
+                            });
+                            google.maps.event.addListener(viewpointMarker, "click", function(){
+                                viewpointWindow.open(map,viewpointMarker);
+                            });
+                            viewpointWindow.open(map,viewpointMarker);
+                        };
+
+
+                        // Frigiliana
+                        function gotoFrigiliana(){
+                            var mapOptions = {
+                                center: new google.maps.LatLng(36.79105242402245, -3.8951283292753915),
+                                zoom: 14,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                            var frigilianaCoords = [
+                                new google.maps.LatLng(36.78664411175082, -3.8925904032115333), //SE
+                                new google.maps.LatLng(36.78360895806614, -3.8949396996355103), //S
+                                new google.maps.LatLng(36.78619090639236, -3.89627725526376), //SW
+                                new google.maps.LatLng(36.79129961159313, -3.8999126628687453), //NW
+                                new google.maps.LatLng(36.79618826856425, -3.9009415518135526), //N
+                                new google.maps.LatLng(36.79238448094418, -3.8942366255232255), //NE
+                            ];
+                            frigilianaDowntown = new google.maps.Polygon({
+                                paths: frigilianaCoords,
+                                strokeColor: "#ff0000",
+                                strokeOpacity: 0.8,
+                                strokeWeight: 3,
+                                fillColor: "#ff0000",
+                                fillOpacity: 0.25
+                            });
+                            frigilianaDowntown.setMap(map)
+
+                            var villageMarker = new google.maps.Marker({
+                                position: new google.maps.LatLng(36.79105242402245, -3.8951283292753915),
+                                map: map,
+                                title: "El Acebuchal",
+                                icon: "icons/landmark.png"
+                            });
+                            var villageWindow = new google.maps.InfoWindow({
+                                content: "<div style=\"width:400px;height:200px\"><h2>El Acebuchal</h2><div class=\"info-content\"><div><img class=\"info-image\" src=\"icons/frigiliana.jpeg\" alt=\"frigiliana\"></div><div><p>Once a ghost village, now a beautiful rural destination. Founded in the 17th century, the village was on the route connecting Granada and Malaga, serving as a stop-off point for weary travellers.<p></div></div></div>"
+                            });
+                            google.maps.event.addListener(villageMarker, "click", function(){
+                                villageWindow.open(map,villageMarker);
+                            });
+                            villageWindow.open(map,villageMarker);
+                        };
+                        var ninaStyles = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ebe3cd"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#523735"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f1e6"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#c9b2a6"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#dcd2be"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ae9e90"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#93817c"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#a5b076"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#447530"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f1e6"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#fdfcf8"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f8c967"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#e9bc62"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e98d58"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#db8555"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#806b63"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8f7d77"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#ebe3cd"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#b9d3c2"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#92998d"
+      }
+    ]
+  }
+]
+                    </script>
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuW3SFzjwIniy2Mqw1uk0ov8nqUz9Owzc&callback=gotoLisbon"></script>
+                     
+                </div>
+        </div>
+        <br style="clear:both;" />	
+    </div>
+</body>
+</html>

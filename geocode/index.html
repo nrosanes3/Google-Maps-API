@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nina the Explora</title>
+<link rel="stylesheet" href="css/main.css" type="text/css" />
+<style>
+    #map {
+        width:600px;
+        height: 500px;
+    }
+</style>
+</head>
+<body>
+    <div id="outerWrap">
+        <div id="wrap">
+            <div id="header"><h1>Nina the Explora</h1></div>
+            <div id="main">
+                <div>
+                    <h2>Nina Explores Madrid!</h2>
+                    <p>Full of energy and packed with cultural attractions, Madrid is a modern metropolis that offers a taste of the real Spain. Wide avenues are congested with traffic, but beautiful parks break up the urban sprawl.</p>
+                    <p>Madrid doesn't have the traditional charm of Andalusia or the beauty of Barcelona, instead, it is a hub of social life with a happening café culture and bustling nightlife. The city is constantly buzzing with activity and there are so many things to see and do that tourists will be spoiled for choice.</p>
+                    <p>Spain's capital city, Madrid boasts an impressive array of historical monuments and art museums, as well as pleasant gardens and public plazas. Take a look at some of the places Nina has explored!</p>
+                </div>
+                <div class="locations">
+                    <div id="map"></div>
+                    <div id="content"></div>
+                    <script>
+                        //Madrid
+                        function gotoMadrid(){
+                            var mapOptions = {
+                                center: new google.maps.LatLng(40.30725267435824, -3.6630842405592046),
+                                zoom: 10,
+                                mapTypeId: google.maps.MapTypeId.HYBRID
+                            };
+                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                            var myCircle = {
+                                strokeColor: "#ff0000",
+                                strokeOpacity: 0.8,
+                                strokeWeight: 3,
+                                fillColor: "#ff0000",
+                                fillOpacity: 0.25,
+                                map: map,
+                                center: new google.maps.LatLng(40.14050176499103, -3.4220509900026976),
+                                radius: 1000
+                            };
+
+                            var cityCircle = new google.maps.Circle(myCircle);
+                            google.maps.event.addListener(cityCircle, "click", function(){
+                                document.getElementById("content").innerHTML = "<h2>Chinchón</h2><img src=\"img/chinchon.jpg\" alt=\"chinchon madrid\"><p>Chinchón is a town, southeast of Madrid, in central Spain. It\’s known for its hilltop houses and medieval Plaza Mayor, circled by buildings with wooden balconies. The Torre del Reloj (Clock Tower) is all that remains of the 14th-century Nuestra Señora de Gracia Church. Museo Etnológico La Posada houses traditional farming tools and machinery. To the south are the remains of the 15th-century Castillo de los Condes.</p>"
+                            }); 
+
+
+                            //palace
+                            var palaceMarker = new google.maps.Marker({
+                                position: new google.maps.LatLng(40.41679363676862, -3.706783671172321),
+                                map: map,
+                                title: "Chocolatería San Ginés",
+                                icon: "icons/restaurant.png"
+                            });
+                            google.maps.event.addListener(palaceMarker, "click", function(){
+                                document.getElementById("content").innerHTML = "<h2>Chocolatería San Ginés</h2><img src=\"img/san-gines.jpeg\" alt=\"Chocolatería San Ginés madrid\"><p>The Chocolatería San Ginés is a café at Pasadizo de San Ginés, 5, in central Madrid, in a passageway close to San Ginés church, west of the Puerta del Sol. It has served principally chocolate con churros (hot chocolate and churros) since 1894. Coffee and cakes are also available. The interior is decorated with mirrors and green wood panels, with green velvet seats and marble tables. The hot chocolate is served in Spanish style - thick, dark and strong - and the churros - deep fried batter, similar to a light, crispy, linear doughnut, cut to length by the staff - are served hot and freshly cooked, ready for dunking.</p>"
+                            });       
+
+
+                            //restaurant
+                            var restaurantMarker = new google.maps.Marker({
+                                position: new google.maps.LatLng(40.41387445655428, -3.6820815410019625),
+                                map: map,
+                                title: "Palacio de Cristal",
+                                icon: "icons/palace-2.png"
+                            });
+                            google.maps.event.addListener(restaurantMarker, "click", function(){
+                                document.getElementById("content").innerHTML = "<h2>Palacio de Cristal</h2><img src=\"img/palacio-de-cristal.jpg\" alt=\"palacio de cristal madrid\"><p>The Palacio de Cristal (\"Glass Palace\") is a conservatory located in Madrid's Buen Retiro Park. The Palacio de Cristal, in the shape of a Greek cross, is made almost entirely of glass set in an iron framework on a brick base, which is decorated with ceramics. The cast-iron frame was manufactured in Bilbao.[2] The structure was designed in a way that would allow it to be re-erected on another site (as happened to the equivalent building in London). However, the building has remained on the original site, next to a lake, and has been restored to its original appearance. It is no longer used as a greenhouse, and is currently used for art exhibits.</p>"
+                            });       
+                        };
+
+                    </script>
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuW3SFzjwIniy2Mqw1uk0ov8nqUz9Owzc&callback=gotoMadrid"></script>
+                     
+                </div>
+        </div>
+        <br style="clear:both;" />	
+    </div>
+</body>
+</html>
